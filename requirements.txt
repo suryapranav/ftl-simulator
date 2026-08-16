@@ -1,0 +1,8 @@
+# FTL simulator dependencies.
+# Only matplotlib is imported directly (for the plots in experiments.py);
+# numpy comes along automatically as a matplotlib dependency.
+# nand.py, ftl.py, workloads.py, and demo.py use the Python standard library only.
+#
+# Tested with Python 3.10 and matplotlib 3.10.8.
+
+matplotlib>=3.7
