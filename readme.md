@@ -66,23 +66,3 @@ Three things worth noticing, each of which is an interview talking point:
 **Per-block wear** (`wear_distribution.png`) under a hot/cold workload shows a
 large spread in program/erase cycles across blocks — the direct motivation for
 wear leveling, which spreads writes so no single block wears out early.
-
-## How this maps to the interview
-
-- *"How would you reduce write amplification?"* → over-provisioning, larger and
-  aligned writes, separating hot and cold data, better GC victim selection,
-  TRIM. This project measures the first three.
-- *"What's the capacity vs. endurance tradeoff?"* → the WA-vs-OP curve is the answer, with numbers I generated.
-- *"Why does an SSD need an FTL / why can't NAND be overwritten in place?"* →
-  the write-elsewhere + invalidate mechanism in `ftl.write()`.
-- *"Why does wear leveling matter?"* → the P/E-cycle spread in the wear plot.
-
-## Possible extensions (good to mention as "what I'd do next")
-
-- **Static wear leveling:** periodically relocate cold data off low-wear blocks
-  so they get reused, flattening the P/E distribution.
-- **Cost-benefit GC** (age-weighted) instead of pure greedy, and compare WA.
-- **A latency model:** charge page-program / block-erase times and show GC-
-  induced tail-latency spikes under bursty writes.
-- **ECC layer:** inject raw bit errors at a rate that rises with P/E cycles and
-  model correction, tying endurance to reliability.
